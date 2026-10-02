@@ -1,10 +1,7 @@
-# CRM v4.1 — Cognitive Resource Manager (constructed implementation)
+# CRM v4.1 — Cognitive Resource Manager
 
 © 2026 Benjamin Hubbard. All rights reserved. Not licensed for redistribution.
 
-Real, tested Python code built from the *CRM v4.1 Master Architecture
-Blueprint* spec text. Every implemented behavior is proven by the verification
-suite: **159/159 tests passing** (Python 3.12, PyTorch CPU, pytest).
 
 ## What this is
 
