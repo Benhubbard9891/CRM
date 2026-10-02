@@ -1,0 +1,33 @@
+# CRM v4.1 — Telemetry Spec (subset)
+# Extracted from: CRM_v4.1_Master_Architecture_Blueprint_v4.1_Production_0_ltc9.pdf
+# Scope: Stage 6 of construction — SafetyTelemetry only.
+
+document: CRM_v4.1_Master_Architecture_Blueprint
+version: "4.1-Production"
+spec_subset: telemetry
+spec_status: partial
+
+primary_metric: per-pass PEM override frequency
+
+PassRecord:
+  fields:
+    - override_frequency: float [0,1]
+    - num_steps: int > 0
+    - num_trips: int >= 0
+    - mean_reward: float finite
+  invariants:
+    - num_trips == round(override_frequency * num_steps)  # cross-check
+    - all non-negative where applicable
+    - finite mean_reward
+
+SafetyTelemetry:
+  record_pass: accepts PassRecord only
+  summary:
+    - passes_recorded
+    - total_steps
+    - total_trips
+    - mean_override_frequency
+    - max_override_frequency
+    - mean_reward_overall (step-weighted)
+    - alert: true only if alert_threshold set and mean_override_frequency exceeds it
+  alert_threshold: optional float in [0,1]; invalid rejected
