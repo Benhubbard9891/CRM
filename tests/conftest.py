@@ -1,10 +1,6 @@
-import pytest
-import torch
+"""Pytest bootstrap: put src/ on the import path (src layout, no install needed)."""
 
-@pytest.fixture
-def device():
-    return torch.device("cpu")
+import sys
+from pathlib import Path
 
-@pytest.fixture
-def embedding_dim():
-    return 32
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
