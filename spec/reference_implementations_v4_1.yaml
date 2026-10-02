@@ -1,0 +1,20 @@
+stage: 7
+name: ReferenceImplementations
+blueprint_source: CRM_v4.1_Master_Architecture_Blueprint
+status: ASSUMED — gaps filled for runnable reference only
+
+items:
+  - action_vocabulary: discrete actions including verify, continue, etc.
+  - text_embedder: simple embedding model for PEM
+  - cost_model: token / compute cost estimator
+  - quality_delta_estimator: heuristic quality change
+  - budget_dynamics: remaining budget update
+  - ppo_learning_rate: 3e-4 (suggestion only)
+  - failure_detector: rule-based failure signal
+  - pem_population_policy: when to store failure embeddings
+  - reference_mlp_policy_trunk: MLP with MC-dropout uncertainty
+  - jsonl_telemetry_export: optional export format
+
+open:
+  - ECU definition: undefined in blueprint
+  - CBM-RL trunk architecture: undefined in blueprint

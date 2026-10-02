@@ -1,0 +1,18 @@
+stage: 2
+name: SafetyCore
+blueprint_source: CRM_v4.1_Master_Architecture_Blueprint
+
+pem_store:
+  description: Failure-embedding store
+  normalization: L2
+  similarity: max cosine
+  rejects: non-finite, zero-norm (all-or-nothing store)
+
+icl_gate:
+  threshold: 0.94
+  nan_behavior: trip (fail-closed)
+  action_on_trip: force verify (logits -inf before softmax)
+
+notes:
+  - Empty DB or zero-norm query -> NaN -> trip
+  - Invalid inputs raise at boundary

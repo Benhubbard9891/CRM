@@ -1,0 +1,25 @@
+stage: 4
+name: ParametricReward
+blueprint_source: CRM_v4.1_Master_Architecture_Blueprint
+
+weights:
+  w_q: 10.0  # quality
+  w_p: 4.0   # progress
+  w_e: 8.0   # efficiency
+  # w_c and w_f are REQUIRED; no invented defaults
+  # caller must supply them
+
+budget_floor: 1e-4
+
+formula: |
+  r = w_q * quality_delta
+    + w_p * progress
+    + w_e * efficiency
+    - w_c * cost
+    - w_f * failure_penalty
+  # with budget ratio clamped and floor applied
+
+notes:
+  - No default values for w_c or w_f; raise if missing
+  - budget_ratio = max(budget_floor, remaining / total)
+  - All inputs must be finite; non-finite raises

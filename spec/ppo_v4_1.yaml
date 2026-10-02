@@ -1,0 +1,25 @@
+stage: 5
+name: PPO
+blueprint_source: CRM_v4.1_Master_Architecture_Blueprint
+
+gae:
+  gamma: 0.99
+  lambda: 0.95
+
+clip:
+  epsilon: 0.20
+
+losses:
+  policy: clipped_surrogate
+  value: mse
+  entropy_bonus: true
+
+early_stopping:
+  kl_threshold: 0.015  # exact distribution KL
+  method: full_batch
+
+update: full_batch_ppo_update
+
+notes:
+  - Exact KL (not approximate) for early stop
+  - No invented learning rate in core; reference suggests 3e-4

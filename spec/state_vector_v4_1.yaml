@@ -1,0 +1,15 @@
+stage: 3
+name: StateVectorBuilder
+blueprint_source: CRM_v4.1_Master_Architecture_Blueprint
+
+dimensions: 12
+layout:
+  0-6: caller-supplied 7D uncertainty
+  7: token entropy
+  8: task class (float)
+  9: budget ratio (clamped [1e-4, 1])
+  10: retrieval entropy
+  11: PEM max-cosine (NaN -> 1.0)
+
+notes:
+  - All components must produce finite values or raise
